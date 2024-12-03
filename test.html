@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Amharic Quiz</title>
+</head>
+<body>
+    <h1>Quiz Generator</h1>
+    <button id="generate">Generate Quiz</button>
+    <pre id="output"></pre>
+
+    <script>
+        // Function to generate quiz
+        async function generateQuiz(prompt) {
+            try {
+                console.log("Sending request to OpenAI API...");
+                const response = await fetch("https://api.openai.com/v1/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": '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'
+                    },
+                    body: JSON.stringify({
+                        model: "text-davinci-003",
+                        prompt: prompt,
+                        max_tokens: 150,
+                    }),
+                });
+
+                console.log("Response status:", response.status);
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status} - ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                console.log("API Response:", data);
+
+                // Ensure data is properly structured
+                if (data.choices && data.choices[0]) {
+                    document.getElementById("output").textContent = data.choices[0].text.trim();
+                } else {
+                    throw new Error("Invalid API response structure");
+                }
+            } catch (error) {
+                console.error("Error in generateQuiz:", error);
+                document.getElementById("output").textContent = `Error: ${error.message}`;
+            }
+        }
+
+        // Event listener for button click
+        document.getElementById("generate").addEventListener("click", () => {
+            generateQuiz("Create a vocabulary quiz in Amharic for beginners.");
+        });
+    </script>
+</body>
+</html>

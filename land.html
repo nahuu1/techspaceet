@@ -1,0 +1,292 @@
+<html><head>
+<title>Yene - Ethiopian Learning & Games Platform</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+:root {
+    --primary: #2563EB;
+    --secondary: #FCD34D;
+    --accent: #FF6B6B;
+    --background: #F0F9FF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--background);
+    overflow-x: hidden;
+}
+
+.hero {
+    min-height: 100vh;
+    padding: 2rem;
+    position: relative;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.character-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+}
+
+.character-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 280px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.character-card:hover {
+    transform: translateY(-10px);
+}
+
+.character {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.circle-bg {
+    width: 150px;
+    height: 150px;
+    background: var(--secondary);
+    border-radius: 50%;
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 3.5rem;
+    color: var(--primary);
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    text-decoration: none;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+}
+
+.footer {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    margin-top: 2rem;
+}
+
+.language-switch {
+    background: white;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .nav {
+        padding: 1rem;
+    }
+    
+    .logo {
+        font-size: 2rem;
+    }
+    
+    .character-container {
+        gap: 1rem;
+    }
+    
+    .character-card {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="hero">
+        <nav class="nav">
+            <div class="logo">Yene</div>
+            <div class="nav-buttons">
+                <button class="cta-button language-switch" onclick="toggleLanguage()">Switch to Amharic</button>
+                <button class="cta-button">Get Started</button>
+            </div>
+        </nav>
+        
+        <h1 class="translate">Learn Ethiopian Culture Through Play</h1>
+        <p class="subtitle translate">Join our vibrant community of learners discovering Ethiopian heritage, language, and traditions through interactive games and activities.</p>
+
+        <div class="button-container">
+            <a href="kids.html" class="cta-button translate">Yene Kids</a>
+            <a href="http://mellaa.rf.gd/?i=3" class="cta-button translate">Yene Games</a>
+        </div>
+
+        <div class="character-container">
+            <div class="character-card floating">
+                <div class="circle-bg">
+                    <svg class="character" viewBox="0 0 100 100">
+                        <circle cx="50" cy="40" r="25" fill="#FFB6C1"/>
+                        <circle cx="42" cy="35" r="3" fill="#333"/>
+                        <circle cx="58" cy="35" r="3" fill="#333"/>
+                        <path d="M40 45 Q50 55 60 45" stroke="#333" fill="none" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3 class="translate">Amharic Adventures</h3>
+                <p class="translate">Learn language through stories</p>
+            </div>
+
+            <div class="character-card floating" style="animation-delay: 0.2s">
+                <div class="circle-bg">
+                    <svg class="character" viewBox="0 0 100 100">
+                        <circle cx="50" cy="40" r="25" fill="#98FB98"/>
+                        <circle cx="42" cy="35" r="3" fill="#333"/>
+                        <circle cx="58" cy="35" r="3" fill="#333"/>
+                        <path d="M40 45 Q50 55 60 45" stroke="#333" fill="none" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3 class="translate">Cultural Games</h3>
+                <p class="translate">Explore traditions interactively</p>
+            </div>
+
+            <div class="character-card floating" style="animation-delay: 0.4s">
+                <div class="circle-bg">
+                    <svg class="character" viewBox="0 0 100 100">
+                        <circle cx="50" cy="40" r="25" fill="#87CEEB"/>
+                        <circle cx="42" cy="35" r="3" fill="#333"/>
+                        <circle cx="58" cy="35" r="3" fill="#333"/>
+                        <path d="M40 45 Q50 55 60 45" stroke="#333" fill="none" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3 class="translate">History Quest</h3>
+                <p class="translate">Journey through Ethiopian history</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Made by Space Tech ET</p>
+    </footer>
+
+    <script>
+        // Translation dictionary
+        const translations = {
+            'Learn Ethiopian Culture Through Play': 'በጨዋታ የኢትዮጵያ ባህል ይማሩ',
+            'Join our vibrant community of learners discovering Ethiopian heritage, language, and traditions through interactive games and activities.': 'በተግባራዊ ጨዋታዎች እና እንቅስቃሴዎች የኢትዮጵያን ቅርስ፣ ቋንቋ እና ባህል የሚያገኙ ተማሪዎችን ጋር ይቀላቀሉ።',
+            'Yene Kids': 'የነ ልጆች',
+            'Yene Games': 'የነ ጨዋታዎች',
+            'Amharic Adventures': 'የአማርኛ ጨዋታዎች',
+            'Cultural Games': 'የባህል ጨዋታዎች',
+            'History Quest': 'የታሪክ ጉዞ',
+            'Learn language through stories': 'በታሪኮች አማካኝነት ቋንቋ ይማሩ',
+            'Explore traditions interactively': 'ባህሎችን በተግባራዊ መንገድ ያስሱ',
+            'Journey through Ethiopian history': 'የኢትዮጵያን ታሪክ ያስሱ',
+            'Switch to Amharic': 'ወደ አማርኛ ቀይር',
+            'Switch to English': 'ወደ እንግሊዘኛ ቀይር'
+        };
+
+        let isAmharic = false;
+
+        function toggleLanguage() {
+            isAmharic = !isAmharic;
+            const elements = document.querySelectorAll('.translate');
+            const langButton = document.querySelector('.language-switch');
+            
+            elements.forEach(element => {
+                const originalText = element.textContent;
+                if (isAmharic) {
+                    element.textContent = translations[originalText] || originalText;
+                } else {
+                    const englishText = Object.entries(translations).find(([key, value]) => value === originalText)?.[0] || originalText;
+                    element.textContent = englishText;
+                }
+            });
+
+            langButton.textContent = isAmharic ? 'Switch to English' : 'Switch to Amharic';
+        }
+
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

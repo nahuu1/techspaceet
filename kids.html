@@ -1,0 +1,1324 @@
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yene Alphabets, Shapes, and Animals - Fun Learning for Kids</title>
+<style>
+  :root {
+    --primary-color: #0084FF; /* Bright blue from image */
+    --secondary-color: #f8f9fa; /* Light gray */
+    --text-color: #333;
+    --box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--primary-color);
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background: var(--primary-color);
+    color: white;
+    box-shadow: var(--box-shadow);
+  }
+
+  .language-toggle {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+  }
+
+  .lang-btn {
+    padding: 8px 16px;
+    border: 2px solid white;
+    border-radius: 20px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .lang-btn.active {
+    background: white;
+    color: var(--primary-color);
+  }
+
+  .lang-btn:hover {
+    transform: scale(1.05);
+  }
+
+  main {
+    background: white;
+    border-radius: 20px;
+    margin: 20px;
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+  }
+
+  .content-wrapper {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .progress-container {
+    margin: 15px 0;
+    width: 100%;
+  }
+
+  .progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 4px;
+    margin: 5px 0;
+  }
+
+  .progress-fill {
+    background: var(--primary-color);
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+
+  .item {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: var(--box-shadow);
+    border: 1px solid #eee;
+  }
+
+  #item-display {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+  }
+
+  .profile-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 36px;
+  }
+
+  .profile-info {
+    display: grid;
+    gap: 10px;
+  }
+
+  .stat-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .stat-box {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: var(--box-shadow);
+  }
+
+  .stat-box h3 {
+    margin: 0;
+    color: var(--primary-color);
+  }
+
+  .draggable-letter {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 5px;
+    cursor: move;
+    user-select: none;
+    transition: transform 0.2s;
+  }
+
+  .draggable-letter.dragging {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+
+  .letter-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    min-height: 60px;
+  }
+
+  .drop-zone {
+    min-height: 60px;
+    border: 2px dashed var(--primary-color);
+    border-radius: 10px;
+    margin: 20px 0;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .dropped-letter {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 5px;
+  }
+
+  .word-description {
+    margin: 20px 0;
+    min-height: 80px;
+  }
+
+  .success-message {
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .success-message h3 {
+    color: #2e7d32;
+    margin: 0 0 10px 0;
+  }
+
+  .score-update {
+    color: #2e7d32;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .body-part {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    stroke-width: 2px;
+    fill: rgba(0, 132, 255, 0.1); /* Light blue with transparency */
+  }
+  
+  .body-part:hover {
+    stroke: var(--primary-color);
+    stroke-width: 3px;
+    fill: rgba(0, 132, 255, 0.3);
+    filter: drop-shadow(0 0 3px rgba(0,132,255,0.5));
+  }
+
+  .human-figure {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .human-figure svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Color scheme for different body parts */
+  .head-part { fill: rgba(255,182,193,0.2); }  /* Light pink */
+  .torso-part { fill: rgba(135,206,250,0.2); } /* Light blue */
+  .limb-part { fill: rgba(144,238,144,0.2); }  /* Light green */
+  .joint-part { fill: rgba(255,218,185,0.2); }  /* Peach */
+
+  /* Letter chase game specific styles */
+  .letter-chase {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .letter-tile {
+    background: var(--primary-color);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .letter-tile:hover {
+    transform: scale(1.1);
+    background: #0066cc;
+  }
+
+  .letter-tile.correct {
+    background: #4CAF50;
+  }
+
+  .letter-tile.wrong {
+    background: #f44336;
+  }
+
+  /* Add to existing CSS */
+  .category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .category-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--primary-color);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  /* Different colors for each category button */
+  .category-button.alphabet { background: #FF6B6B; }
+  .category-button.numbers { background: #4ECDC4; }
+  .category-button.shapes { background: #45B7D1; }
+  .category-button.animals { background: #96CEB4; }
+  .category-button.bodyParts { background: #FF9F9F; }
+  .category-button.amharicTrivia { background: #9B59B6; }
+  .category-button.letterChase { background: #3498DB; }
+  .category-button.alphabetDragDrop { background: #2ECC71; }
+
+  .category-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+
+  .category-button:active {
+    transform: translateY(1px);
+  }
+
+  /* Button ripple effect */
+  .category-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+
+  .category-button:active::after {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .category-buttons {
+      flex-direction: column;
+    }
+    
+    .category-button {
+      width: 100%;
+    }
+    
+    .language-toggle {
+      margin-top: 10px;
+    }
+    
+    header {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+  }
+
+  /* Add to existing CSS */
+  .animal-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .animal-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .animal-item:hover {
+    transform: translateX(5px);
+    background: rgba(0, 132, 255, 0.1);
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    Tech Space ET
+    <div class="language-toggle">
+      <button class="lang-btn active" data-lang="english">English</button>
+      <button class="lang-btn" data-lang="amharic">አማርኛ</button>
+    </div>
+  </header>
+	<a href="https://techspace.rf.gd/landd.html" class="chakra-link chakra-button button themed-heading-no-gradient css-v77c72" style="background-color:var(--button-color);background-image:var(--button-gradient);border-radius:var(--button-border-radius, var(--box-border-radius))" data-variant="solid" data-export-as-image="true" data-export-link="" data-is-current-page="false"><div class="chakra-text css-tvj5s7" style="color:var(--button-color-inverted)"><div data-node-view-content="" style="white-space:pre-wrap"><div data-node-view-content-inner="button" style="white-space:inherit">Back</div></div></div></a>
+  
+  <main>
+    <div class="profile-header">
+      <img src="Pink and Blue Playful Kids Stuff Logo.png" alt="Logo" class="profile-image" style="width: 100
+																								   px; height: auto;">
+      <div class="profile-info">
+        <h1>Yene Alphabets, Shapes, and Animals</h1>
+        <h2>Fun Learning for Kids</h2>
+        
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 75%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-boxes">
+      <div class="stat-box">
+        <h3>Bio</h3>
+        <p>Interactive learning platform for Ethiopian children</p>
+      </div>
+      <div class="stat-box">
+        <h3>Goals</h3>
+        <p>Master Amharic alphabet and vocabulary</p>
+      </div>
+      <div class="stat-box">
+        <h3>Motivations</h3>
+        <p>Fun and engaging cultural education</p>
+      </div>
+      <div class="stat-box">
+        <h3>Concerns</h3>
+        <p>Maintaining cultural authenticity</p>
+      </div>
+    </div>
+
+    <div class="category-buttons">
+      <button class="category-button alphabet">Alphabet</button>
+      <button class="category-button numbers">Numbers</button>
+      <button class="category-button shapes">Shapes</button>
+      <button class="category-button animals">Animals</button>
+      <button class="category-button bodyParts">Body Parts</button>
+      <button class="category-button amharicTrivia">Amharic Trivia</button>
+      <button class="category-button letterChase">Letter Chase</button>
+      <button class="category-button alphabetDragDrop">Alphabet Drag & Drop</button>
+    </div>
+    
+    <div class="content-wrapper">
+      <div id="item-container"></div>
+      <div id="item-display">
+        <div id="selected-item"></div>
+        <div id="word-display"></div>
+        <div id="example-display"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Made by Tech Space ET
+  </footer>
+
+  <script>
+    let currentLanguage = 'english';
+
+    // Add language toggle functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const langButtons = document.querySelectorAll('.lang-btn');
+      
+      langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const language = btn.dataset.lang;
+          currentLanguage = language;
+          
+          // Update active button state
+          langButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          // Update content with new language
+          const activeCategory = document.querySelector('.category-button[style*="opacity: 1"]')?.classList[1] || 'alphabet';
+          updateContent(activeCategory);
+        });
+      });
+    });
+
+    // Update the updateContent function to use currentLanguage
+    function updateContent(selectedCategory) {
+      createItems(selectedCategory, currentLanguage);
+      
+      const selectedItemEl = document.getElementById('selected-item');
+      const wordDisplayEl = document.getElementById('word-display');
+      const exampleDisplayEl = document.getElementById('example-display');
+      
+      if (selectedItemEl) selectedItemEl.textContent = '';
+      if (wordDisplayEl) wordDisplayEl.textContent = '';
+      if (exampleDisplayEl) exampleDisplayEl.textContent = '';
+    }
+
+    let currentWord = null;
+    let score = 0;
+
+    const triviaQuestions = [
+      {
+        question: "What is the capital of Ethiopia?",
+        pronunciation: "ah-dis ah-bah-bah",
+        options: ["Addis Ababa", "Dire Dawa", "Bahir Dar", "Gondar"],
+        correctAnswer: "Addis Ababa",
+        explanation: "Addis Ababa is the capital and largest city of Ethiopia."
+      },
+      {
+        question: "What does 'ሰላም' mean?",
+        pronunciation: "se-lam",
+        options: ["Hello/Peace", "Goodbye", "Thank you", "Please"],
+        correctAnswer: "Hello/Peace",
+        explanation: "'ሰላም' (Selam) means both 'hello' and 'peace' in Amharic."
+      },
+      {
+        question: "What is the traditional Ethiopian bread called?",
+        pronunciation: "in-jer-ah",
+        options: ["Injera", "Doro Wat", "Shiro", "Tibs"],
+        correctAnswer: "Injera",
+        explanation: "Injera is a sourdough flatbread that's essential to Ethiopian cuisine."
+      }
+    ];
+
+    const items = {
+      alphabet: {
+        english: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+        amharic: 'ሀለሐመሠረሰሸቀበተቸኀነኘአከኸወዐዘዠየደጀገጠጨጰጸፀፈፐ'
+      },
+      shapes: {
+        english: '□○△▽⬠⬡⭐︎❤︎',
+        amharic: '□○△▽⬠⬡⭐︎❤︎'
+      },
+      animals: {
+        english: [
+          'Lion', 'Elephant', 'Giraffe', 'Zebra', 'Rhino', 'Monkey', 'Hippopotamus', 'Crocodile',
+          'Ethiopian Wolf', 'Gelada Baboon', 'Mountain Nyala', 'Walia Ibex', 'Ethiopian Highland Hare',
+          'Menelik\'s Bushbuck', 'Ethiopian Klipspringer', 'Swayne\'s Hartebeest'
+        ],
+        amharic: [
+          'አንበሳ', 'ዝሆን', 'ቀጭኔ', 'የሜዳ አህያ', 'አውራሪስ', 'ዝንጀሮ', 'ጉማሬ', 'አዞ',
+          'የኢትዮጵያ ቀይ ወሳጭ', 'ጭላዳ', 'የመኔሊክ ኮላዳ', 'ዋልያ', 'የኢትዮጵያ ጥቅጥቅ ሽክርክርት',
+          'የመኔሊክ ዱኩላ', 'የኢትዮጵያ ጠይም ኩዋላ', 'የስዋይን አልጋዋ'
+        ]
+      },
+      numbers: {
+        english: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+        amharic: ['፩', '፪', '፫', '፬', '፭', '፮', '፯', '፰', '፱', '፲']
+      },
+      bodyParts: {
+        english: [
+          'Head', 'Face', 'Eye', 'Nose', 'Mouth', 'Ear', 'Neck', 
+          'Shoulder', 'Chest', 'Back', 'Arm', 'Elbow', 'Hand', 
+          'Finger', 'Stomach', 'Leg', 'Knee', 'Foot', 'Toe'
+        ],
+        amharic: [
+          'ራስ', 'ፊት', 'ዐይን', 'አፍንጫ', 'አፍ', 'ጆሮ', 'አንገት',
+          'ትከሻ', 'ደረት', 'ጀርባ', 'እጅ', 'ክርን', 'መዳፍ',
+          'ጣት', 'ሆድ', 'እግር', 'ጉልበት', 'እግር ጫማ', 'የእግር ጣት'
+        ]
+      },
+      amharicTrivia: {
+        english: ['Question 1', 'Question 2', 'Question 3'],
+        amharic: ['ጥያቄ ፩', 'ጥያቄ ፪', 'ጥያቄ ፫']
+      },
+      letterChase: {
+        english: ['A', 'B', 'C', 'D', 'E'],
+        amharic: ['ሀ', 'ለ', 'ሐ', 'መ', 'ሠ']
+      }
+    };
+
+    const descriptions = {
+      alphabet: {
+        english: {
+          'A': ['Addis Ababa', 'The capital city of Ethiopia, known for its rich history and vibrant culture.'],
+          'B': ['Berbere', 'A spicy blend of herbs and spices used in Ethiopian cuisine, adding flavor to many dishes.'],
+          'C': ['Coffee', 'Ethiopia is the birthplace of coffee, with a rich tradition of coffee ceremonies.'],
+          'D': ['Doro Wat', 'A spicy chicken stew that is considered the national dish of Ethiopia.'],
+          'E': ['Ethiopia', 'A country in East Africa known for its ancient history, diverse cultures, and beautiful landscapes.'],
+          'F': ['Fasika', 'The Ethiopian Easter celebration, marked by fasting and joyous feasts.'],
+          'G': ['Ge\'ez', 'An ancient Semitic language used in Ethiopian literature and religious texts.'],
+          'H': ['Habesha', 'A term used to describe the Ethiopian and Eritrean people and their cultures.'],
+          'I': ['Injera', 'A spongy flatbread made from teff flour, essential in Ethiopian cuisine.'],
+          'J': ['Jebena', 'A traditional Ethiopian coffee pot used in coffee ceremonies.'],
+          'K': ['Konso', 'A UNESCO World Heritage site known for its cultural landscape and terraced hillsides.'],
+          'L': ['Lalibela', 'A town famous for its rock-hewn churches, considered a wonder of the world.'],
+          'M': ['Meskel', 'An annual religious festival in Ethiopia celebrating the finding of the True Cross.'],
+          'N': ['Nile', 'The world\'s longest river, with its Blue Nile source in Ethiopia.'],
+          'O': ['Oromo', 'The largest ethnic group in Ethiopia, with a rich cultural heritage.'],
+          'P': ['Piazza', 'A historic neighborhood in Addis Ababa, known for its Italian-influenced architecture.'],
+          'Q': ['Qemem', 'Ethiopian spices used to add flavor and aroma to various dishes.'],
+          'R': ['Ras Dashen', 'The highest mountain in Ethiopia, located in the Simien Mountains.'],
+          'S': ['Simien Mountains', 'A national park in Ethiopia, home to unique wildlife and breathtaking landscapes.'],
+          'T': ['Teff', 'A tiny grain native to Ethiopia, used to make injera and other traditional foods.'],
+          'U': ['Unity', 'A central value in Ethiopian culture, emphasizing togetherness and harmony.'],
+          'V': ['Valley', 'Ethiopia is known for its Great Rift Valley, a geological wonder stretching across the country.'],
+          'W': ['Walia Ibex', 'An endangered species of wild goat found only in the Simien Mountains of Ethiopia.'],
+          'X': ['Xmas', 'Christmas in Ethiopia is celebrated on January 7th according to the Ethiopian calendar.'],
+          'Y': ['Yekatit', 'The sixth month in the Ethiopian calendar, corresponding to February-March.'],
+          'Z': ['Zemen', 'Meaning "era" or "time" in Amharic, reflecting Ethiopia\'s rich history.']
+        },
+        amharic: {
+          'ሀ': ['ሀበሻ (Habasha)', 'A term referring to Ethiopian and Eritrean people, their cultures, and traditions.'],
+          'ለ': ['ለሊት (Night)', 'The time when the sun is below the horizon, often associated with rest and reflection in Ethiopian culture.'],
+          'ሐ': ['ሐመር (Ship)', 'A vessel for water transportation, important for trade along Ethiopia\'s rivers and lakes.'],
+          'መ': ['መኪና (Car)', 'A modern means of transportation, becoming increasingly common in Ethiopian cities and towns.'],
+          'ሠ': ['ሠዓት (Clock)', 'A device for measuring time, symbolizing the importance of punctuality in Ethiopian society.'],
+          'ረ': ['ራስ (Head)', 'Literally meaning "head," also used to denote a traditional title for Ethiopian nobility.'],
+          'ሰ': ['ሰማይ (Sky)', 'The expanse above the Earth, often admired in Ethiopia\'s diverse landscapes.'],
+          'ሸ': ['ሸሚዝ (Shirt)', 'A common article of clothing, often featuring traditional Ethiopian designs and patterns.'],
+          'ቀ': ['ቀለም (Color)', 'Used to describe the vibrant hues found in Ethiopian art, clothing, and nature.'],
+          'በ': ['በሬ (Ox)', 'An important animal in Ethiopian agriculture, used for plowing fields and transportation.'],
+          'ተ': ['ተምሳሌት (Example)', 'Used in education and daily life to illustrate concepts and ideas.'],
+          'ቸ': ['ቸኮል (Mud)', 'Often used in traditional Ethiopian construction, particularly for tukul houses.'],
+          'ኀ': ['ኀይል (Power)', 'Representing strength and energy, important concepts in Ethiopian culture and history.'],
+          'ነ': ['ነጋሪት (Drum)', 'A traditional Ethiopian instrument used in ceremonies and cultural performances.'],
+          'ኘ': ['ኘፍጢራ (Turnip)', 'A vegetable used in Ethiopian cuisine, often in stews and salads.'],
+          'አ': ['አበባ (Flower)', 'Symbolizing beauty and nature, often used in Ethiopian names and art.'],
+          'ከ': ['ከዋክብት (Stars)', 'Celestial bodies visible at night, part of Ethiopia\'s rich astronomical traditions.'],
+          'ኸ': ['ኸርከር (Roll)', 'A movement or action, often used in games or daily activities.'],
+          'ወ': ['ወንበር (Chair)', 'A piece of furniture for sitting, ranging from traditional stools to modern designs.'],
+          'ዐ': ['ዐይን (Eye)', 'The organ of sight, also symbolizing wisdom and perception in Ethiopian culture.'],
+          'ዘ': ['ዘንባባ (Elephant)', 'A majestic animal found in some parts of Ethiopia, respected in folklore and conservation efforts.'],
+          'ዠ': ['ዠንጠላ (Umbrella)', 'Used for protection from sun or rain, often decorative in Ethiopian ceremonies.'],
+          'የ': ['የሊት (Night)', 'The dark period between sunset and sunrise, often associated with rest and storytelling in Ethiopian tradition.'],
+          'ደ': ['ደብተር (Notebook)', 'Used for writing and studying, symbolizing the importance of education in Ethiopia.'],
+          'ጀ': ['ጀግና (Hero)', 'A person admired for their courage or achievements, celebrated in Ethiopian history and folklore.'],
+          'ገ': ['ገበሬ (Farmer)', 'An important profession in Ethiopia, responsible for cultivating the land and producing food.'],
+          'ጠ': ['ጠረጴዛ (Table)', 'A piece of furniture used for dining or work, central to Ethiopian hospitality and family life.'],
+          'ጨ': ['ጨረቃ (Moon)', 'The Earth\'s natural satellite, playing a role in Ethiopian calendar systems and folklore.'],
+          'ጰ': ['ጰጰያ (Papaya)', 'A tropical fruit grown and enjoyed in many parts of Ethiopia.'],
+          'ጸ': ['ጸሐይ (Sun)', 'The star at the center of our solar system, vital for life and agriculture in Ethiopia.'],
+          'ፀ': ['ፀሐይ (Sun)', 'An alternative spelling for sun, emphasizing its importance in Ethiopian daily life and culture.'],
+          'ፈ': ['ፈረስ (Horse)', 'An animal important in Ethiopian history, used for transportation and in cultural ceremonies.'],
+          'ፐ': ['ፓስታ (Pasta)', 'A food introduced through Italian influence, now incorporated into some Ethiopian cuisines.']
+        }
+      },
+      shapes: {
+        english: {
+          '□': ['Square', 'A shape with four equal sides and four right angles, often seen in Ethiopian art and architecture.'],
+          '○': ['Circle', 'A round shape with no corners, symbolizing unity and completeness in Ethiopian culture.'],
+          '△': ['Triangle', 'A three-sided shape, found in traditional Ethiopian designs and jewelry.'],
+          '▽': ['Inverted Triangle', 'A triangle pointing downwards, sometimes used in Ethiopian symbolic art.'],
+          '⬠': ['Hexagon', 'A six-sided shape, seen in some Ethiopian patterns and designs.'],
+          '⬡': ['Pentagon', 'A five-sided shape, occasionally used in Ethiopian decorative arts.'],
+          '⭐︎': ['Star', 'A shape with multiple points, important in Ethiopian astronomy and folklore.'],
+          '❤︎': ['Heart', 'A symbol of love and compassion, valued in Ethiopian social relationships.']
+        },
+        amharic: {
+          '□': ['ኩብ ዓራት (Cube Arat)', 'A shape with four equal sides, often seen in Ethiopian traditional art and crafts.'],
+          '○': ['ክብ (Kib)', 'A circular shape, symbolizing eternity and wholeness in Ethiopian culture.'],
+          '△': ['ሶስት ማዕዘን (Sost Ma\'izen)', 'A three-sided shape, common in Ethiopian jewelry and decorative patterns.'],
+          '▽': ['ግልባጭ ሶስት ማዕዘን (Gilbach Sost Ma\'izen)', 'An upside-down triangle, used in some Ethiopian symbolic representations.'],
+          '⬠': ['ስድስት ማዕዘን (Sidist Ma\'izen)', 'A six-sided shape, found in some Ethiopian design motifs.'],
+          '⬡': ['አምስት ማዕዘን (Amist Ma\'izen)', 'A five-sided shape, occasionally used in Ethiopian decorative arts.'],
+          '⭐︎': ['ኮኮብ (Kokeb)', 'A star shape, significant in Ethiopian astronomy and traditional stories.'],
+          '❤︎': ['ልብ (Lib)', 'A heart shape, representing love and kindness in Ethiopian social contexts.']
+        }
+      },
+      animals: {
+        english: {
+          'Lion': ['Lion (Ambessa)', 'The national symbol of Ethiopia, representing strength and courage.'],
+          'Elephant': ['Elephant (Zihon)', 'Found in some parts of Ethiopia, symbolizing wisdom and memory.'],
+          'Giraffe': ['Giraffe (Kechene)', 'Tall and graceful, found in some of Ethiopia\'s national parks.'],
+          'Zebra': ['Zebra (Ye Meda Ahya)', 'Known for its distinctive stripes, inhabiting Ethiopia\'s grasslands.'],
+          'Rhino': ['Rhinoceros (Awraris)', 'Once found in Ethiopia, now efforts are being made for their reintroduction.'],
+          'Monkey': ['Monkey (Zinjero)', 'Various species found in Ethiopia\'s forests, known for their playfulness.'],
+          'Hippopotamus': ['Hippopotamus (Gumare)', 'Found in Ethiopia\'s rivers and lakes, playing a role in local ecosystems.'],
+          'Crocodile': ['Crocodile (Azo)', 'Inhabiting Ethiopia\'s waterways, respected and feared in local folklore.'],
+          'Ethiopian Wolf': ['Ethiopian Wolf (Ky Wasach)', 'Africa\'s most endangered carnivore, found only in Ethiopian highlands. Known for its reddish coat and slender build.'],
+          'Gelada Baboon': ['Gelada Baboon (Chilada)', 'Endemic to Ethiopian highlands, known for their distinctive red chest patch and complex social structure.'],
+          'Mountain Nyala': ['Mountain Nyala (Meneliks Kolada)', 'A large antelope found only in Ethiopia\'s Bale Mountains, known for its spiral horns.'],
+          'Walia Ibex': ['Walia Ibex (Walia)', 'A rare goat found only in the Simien Mountains of Ethiopia, known for its impressive curved horns.'],
+          'Ethiopian Highland Hare': ['Ethiopian Highland Hare (Tinkish Shikrkit)', 'A unique species of hare found only in Ethiopia\'s high-altitude regions.'],
+          'Menelik\'s Bushbuck': ['Menelik\'s Bushbuck (Meneliks Dikula)', 'An endemic antelope species named after Emperor Menelik II, found in Ethiopian mountains.'],
+          'Ethiopian Klipspringer': ['Ethiopian Klipspringer (Ethiopan Kuala)', 'A small antelope adapted to rocky mountain areas of Ethiopia.'],
+          'Swayne\'s Hartebeest': ['Swayne\'s Hartebeest (Swaynes Algawa)', 'An endangered antelope species found only in Ethiopia\'s protected areas.']
+        },
+        amharic: {
+          'አንበሳ': ['አንበሳ (Anbessa)', 'የኢትዮጵያ ብሔራዊ ምልክት፣ ጥንካሬንና ድፍረትን የሚወክል።'],
+          'ዝሆን': ['ዝሆን (Zihon)', 'በኢትዮጵያ አንዳንድ ቦታዎች የሚገኝ፣ ጥበብንና የምርት ይወክላል።'],
+          'ቀጭኔ': ['ቀጭኔ (Kechene)', 'ረጅምና ያማረ፣ በኢትዮጵያ አንዳንድ ብሔራዊ ፓርኮች ውስጥ የሚገኝ።'],
+          'የሜዳ አህያ': ['የሜዳ አህያ (Ye Meda Ahya)', 'በተጣመመ የሚገኝ፣ በደረቅ የታወቀ የፍየል ዝርያ።'],
+          'አውራሪስ': ['አውራሪስ (Awraris)', 'ከዚህ በፊት በኢትዮጵያ ይገኝ የነበረ፣ አሁን ለመመለስ ጥረቶች እየተደረጉ ነው።'],
+          'ዝንጀሮ': ['ዝንጀሮ (Zinjero)', 'በኢትዮጵያ ደኖች የሚገኙ የተለያዩ ዝርያዎች፣ በጨዋታቸው የሚታወቁ።'],
+          'ጉማሬ': ['ጉማሬ (Gumare)', 'በኢትዮጵያ ወንዞችና ሐይቆች የሚገኝ፣ በአካባቢው ስነ-ምህዳር ውስጥ የሚጫወት።'],
+          'አዞ': ['አዞ (Azo)', 'የኢትዮጵያን ውሃዎች የሚኖር፣ በአካባቢው ባህል ውስጥ የሚከበርና የሚፈራ።'],
+          'የኢትዮጵያ ቀይ ወሳጭ': ['የኢትዮጵያ ቀይ ወሳጭ (Ye Ethiopia Key Washach)', 'በአፍሪካ በጣም አደገኛ በመጥፋት ላይ ያለ አሳዳሪ እንስሳ፣ በኢትዮጵያ ከፍተኛ ቦታዎች ብቻ የሚገኝ።'],
+          'ጭላዳ': ['ጭላዳ (Chilada)', 'የማዕዘን ከፍተኛ የተለየ የእንስሳት ዝርያ፣ በኢትዮጵያ ተራሮች ውስጥ የሚገኝ።'],
+          'የመኔሊክ ኮላዳ': ['የመኔሊክ ኮላዳ (Ye Menelik Kolada)', 'በኢትዮጵያ የሚገኝ አደገኛ የአንትሎፕ ዝርያ።'],
+          'ዋልያ': ['ዋልያ (Walia)', 'በተራሮች ብቻ የሚገኝ የእንስሳት ዝርያ፣ በኢትዮጵያ የተመለከተ የተለየ ዝርያ።'],
+          'የኢትዮጵያ ጥቅጥቅ ሽክርክርት': ['የኢትዮጵያ ጥቅጥቅ ሽክርክርት (Ye Ethiopia Tikit Shikrkit)', 'በኢትዮጵያ ብቻ የሚገኝ የተለየ የሽክርክርት ዝርያ።'],
+          'የመኔሊክ ዱኩላ': ['የመኔሊክ ዱኩላ (Ye Menelik Dukula)', 'በኢትዮጵያ የሚገኝ አደገኛ የአንትሎፕ ዝርያ።'],
+          'የኢትዮጵያ ጠይም ኩዋላ': ['የኢትዮጵያ ጠይም ኩዋላ (Ye Ethiopia Teyim Kwala)', 'በኢትዮጵያ የገነነ ዝርያ፣ በኢትዮጵያ ከፍተኛ ቦታዎች ብቻ የሚገኝ።'],
+          'የስዋይን አልጋዋ': ['የስዋይን አልጋዋ (Ye Swaynes Algawa)', 'በኢትዮጵያ የተጠበቁ አካባቢዎች ብቻ የሚገኝ የተለየ ዝርያ።']
+        }
+      },
+      numbers: {
+        english: {
+          '0': ['Zero', 'The concept of nothing, representing absence of quantity'],
+          '1': ['One', 'The first natural number, representing a single unit'],
+          '2': ['Two', 'One plus one equals two, representing a pair'],
+          '3': ['Three', 'A triangular number, representing a trio'],
+          '4': ['Four', 'The number of sides in a square, representing a quartet'],
+          '5': ['Five', 'The number of fingers on one hand, half of ten'],
+          '6': ['Six', 'Half a dozen, representing six units'],
+          '7': ['Seven', 'A lucky number in many cultures, representing a week'],
+          '8': ['Eight', 'An octagonal number, double of four'],
+          '9': ['Nine', 'The last single digit number, three times three'],
+          '10': ['Ten', 'The base of the decimal system, two hands worth']
+        },
+        amharic: {
+          '፩': ['አንድ', 'የመጀመሪያው ተፈጥሯዊ ቁጥር', 'ahnd'], 
+          '፪': ['ሁለት', 'ከአንድ የሚቀጥለው ቁጥር', 'hulet'],
+          '፫': ['ሦስት', 'የሦስት ማዕዘን ጎኖች ብዛት', 'sost'],
+          '፬': ['አራት', 'የካሬ ጎኖች ብዛት', 'arat'],
+          '፭': ['አምስት', 'በአንድ እጅ ያሉ ጣቶች ብዛት', 'amist'], 
+          '፮': ['ስድስት', 'የስድስት ጎን ቅርጽ ጎኖች ብዛት', 'sidist'],
+          '፯': ['ሰባት', 'በብዙ ባህሎች እድለኛ ቁጥር', 'sebat'],
+          '፰': ['ስምንት', 'የስምንት ጎን ቅርጽ ጎኖች ብዛት', 'simint'],
+          '፱': ['ዘጠኝ', 'የመጨረሻው አንድ አሃዝ ቁጥር', 'zetegn'],
+          '፲': ['አስር', 'የአሥርዮሽ ስሌት መሠረት', 'assir']
+        }
+      }
+    };
+
+    function dragStart(e) {
+      e.target.classList.add('dragging');
+      e.dataTransfer.setData('text/plain', e.target.textContent);
+    }
+
+    function dragEnd(e) {
+      e.target.classList.remove('dragging');
+    }
+
+    function dragOver(e) {
+      e.preventDefault();
+    }
+
+    function drop(e) {
+      e.preventDefault();
+      const dropZone = e.target;
+      const letter = e.dataTransfer.getData('text/plain');
+      
+      // Only proceed if dropping on the drop zone
+      if (!dropZone.classList.contains('drop-zone')) return;
+
+      // Create new letter tile in drop zone
+      const letterTile = document.createElement('div');
+      letterTile.className = 'dropped-letter';
+      letterTile.textContent = letter;
+      dropZone.appendChild(letterTile);
+
+      // Remove original dragged element
+      const draggedElement = document.querySelector('.dragging');
+      if (draggedElement) {
+        draggedElement.remove();
+      }
+
+      // Check if word is complete
+      if (currentWord) {  // Add null check
+        const droppedLetters = Array.from(dropZone.children).map(child => child.textContent).join('');
+        if (droppedLetters === currentWord.word) {
+          score += 10;
+          dropZone.innerHTML = ''; // Clear drop zone
+          
+          // Show word description
+          const descriptionDiv = document.querySelector('.word-description');
+          descriptionDiv.innerHTML = `
+            <div class="success-message">
+              <h3>Correct!</h3>
+              <p>${currentWord.word} - ${currentWord.description}</p>
+              <div class="score-update">+10 points</div>
+            </div>
+          `;
+
+          // Start next word after delay
+          setTimeout(() => {
+            descriptionDiv.innerHTML = '';
+            initializeGame();
+          }, 2000);
+        }
+      }
+    }
+
+    function createAlphabetDragDrop() {
+      const gameContainer = document.createElement('div');
+      gameContainer.className = 'drag-drop-container';
+
+      const currentLevel = 1;
+      
+      // Initialize game with proper error handling
+      function initializeGame() {
+        if (!descriptions?.wordSequences?.[currentLanguage]) {
+          console.error('Word sequences not found for language:', currentLanguage);
+          gameContainer.innerHTML = '<p>Game data not available for selected language.</p>';
+          return;
+        }
+
+        const availableWords = descriptions.wordSequences[currentLanguage].filter(w => w?.level === currentLevel);
+        
+        if (!availableWords?.length) {
+          console.error('No words available for current level');
+          gameContainer.innerHTML = '<p>No words available for current level.</p>';
+          return;
+        }
+
+        currentWord = availableWords[Math.floor(Math.random() * availableWords.length)];
+        
+        gameContainer.innerHTML = `
+          <div class="game-header">
+            <div class="score">Score: ${score}</div>
+            <div class="level">Level: ${currentLevel}</div>
+          </div>
+          <div class="target-sequence">${currentLanguage === 'amharic' ? 'የሚፈልጉት ቃል:' : 'Target Word:'} ${currentWord.word}</div>
+          <div class="letter-container"></div>
+          <div class="drop-zone"></div>
+          <div class="word-description"></div>
+        `;
+
+        const letters = currentWord.word.split('');
+        const shuffledLetters = [...letters].sort(() => Math.random() - 0.5);
+
+        const letterContainer = gameContainer.querySelector('.letter-container');
+        shuffledLetters.forEach(letter => {
+          const letterTile = document.createElement('div');
+          letterTile.className = 'draggable-letter';
+          letterTile.draggable = true;
+          letterTile.textContent = letter;
+          
+          letterTile.addEventListener('dragstart', dragStart);
+          letterTile.addEventListener('dragend', dragEnd);
+          letterContainer.appendChild(letterTile);
+        });
+
+        const dropZone = gameContainer.querySelector('.drop-zone');
+        dropZone.addEventListener('dragover', dragOver);
+        dropZone.addEventListener('drop', drop);
+      }
+
+      try {
+        initializeGame();
+      } catch (error) {
+        console.error('Error initializing game:', error);
+        gameContainer.innerHTML = '<p>An error occurred while starting the game. Please try again.</p>';
+      }
+
+      return gameContainer;
+    }
+
+    const container = document.getElementById('item-container');
+    const selectedItem = document.getElementById('selected-item');
+    const wordDisplay = document.getElementById('word-display');
+    const exampleDisplay = document.getElementById('example-display');
+
+    // Smooth scroll behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Add animation class to items when they appear in viewport
+    const observerOptions = {
+      root: null,
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+
+    // Update Content Function
+    function updateContent(selectedCategory) {
+      createItems(selectedCategory, currentLanguage);
+      
+      const selectedItemEl = document.getElementById('selected-item');
+      const wordDisplayEl = document.getElementById('word-display');
+      const exampleDisplayEl = document.getElementById('example-display');
+      
+      if (selectedItemEl) selectedItemEl.textContent = '';
+      if (wordDisplayEl) wordDisplayEl.textContent = '';
+      if (exampleDisplayEl) exampleDisplayEl.textContent = ''; 
+    }
+
+    // DOMContentLoaded Event Listener
+    document.addEventListener('DOMContentLoaded', () => {
+      const defaultCategory = 'alphabet';
+      updateContent(defaultCategory);
+      
+      // Highlight the default category button
+      const defaultButton = document.querySelector(`.category-button.${defaultCategory}`);
+      if (defaultButton) {
+        defaultButton.style.opacity = '1';
+      }
+    });
+
+    // Update the createLetterChaseGame function
+    function createLetterChaseGame() {
+      const gameContainer = document.createElement('div');
+      gameContainer.className = 'letter-chase';
+
+      let currentWord = '';
+      let score = 0;
+      let timeLeft = 60;
+      let timer;
+      
+      function startGame() {
+        // Default to English words since we removed language toggle
+        const words = ['HELLO', 'PEACE', 'LOVE', 'HAPPY', 'SMILE', 'LEARN'];
+        currentWord = words[Math.floor(Math.random() * words.length)];
+        
+        // Rest of startGame function remains the same...
+      }
+
+      // Rest of createLetterChaseGame function remains the same...
+    }
+
+    // Update createItems function when handling letter chase
+    function createItems(category, language) {
+      container.innerHTML = '';
+      container.style.width = '40%';
+      document.getElementById('item-display').style.display = 'block';
+
+      // Special handling for game categories
+      if (category === 'alphabetDragDrop') {
+        container.style.width = '100%';
+        document.getElementById('item-display').style.display = 'none';
+        container.appendChild(createAlphabetDragDrop());
+        return;
+      }
+      
+      if (category === 'amharicTrivia') {
+        container.style.width = '100%';
+        document.getElementById('item-display').style.display = 'none';
+        container.appendChild(createTriviaGame());
+        return;
+      }
+      
+      if (category === 'letterChase') {
+        container.style.width = '100%';
+        const itemDisplay = document.getElementById('item-display');
+        if (itemDisplay) {
+          itemDisplay.style.display = 'none';
+        }
+        container.appendChild(createLetterChaseGame());
+        return;
+      }
+
+      // Update the SVG part in the createItems function where category === 'bodyParts'
+      if (category === 'bodyParts') {
+        container.innerHTML = `
+          <div class="human-figure">
+            <svg viewBox="0 0 300 500" preserveAspectRatio="xMidYMid meet">
+              <g class="head-part">
+                <circle cx="150" cy="60" r="40" class="body-part" data-part="${language === 'english' ? 'Head' : 'ራስ'}" />
+                <circle cx="150" cy="60" r="30" class="body-part" data-part="${language === 'english' ? 'Face' : 'ፊት'}" />
+                <ellipse cx="135" cy="50" rx="5" ry="3" class="body-part" data-part="${language === 'english' ? 'Eye' : 'ዐይን'}" />
+                <ellipse cx="165" cy="50" rx="5" ry="3" class="body-part" data-part="${language === 'english' ? 'Eye' : 'ዐይን'}" />
+                <path d="M145,65 Q150,68 155,65" class="body-part" data-part="${language === 'english' ? 'Mouth' : 'አፍ'}" />
+                <path d="M148,55 Q150,58 152,55" class="body-part" data-part="${language === 'english' ? 'Nose' : 'አፍንጫ'}" />
+              </g>
+
+              <g class="joint-part">
+                <path d="M140,90 Q150,95 160,90 Q160,100 150,105 Q140,100 140,90" 
+                  class="body-part" data-part="${language === 'english' ? 'Neck' : 'አንገት'}" />
+              </g>
+
+              <g class="torso-part">
+                <path d="M100,110 Q150,120 200,110 L200,250 Q150,260 100,250 Z" 
+                  class="body-part" data-part="${language === 'english' ? 'Chest' : 'ደረት'}" />
+                <path d="M110,250 Q150,260 190,250 L190,320 Q150,330 110,320 Z" 
+                  class="body-part" data-part="${language === 'english' ? 'Stomach' : 'ሆድ'}" />
+              </g>
+
+              <g class="limb-part">
+                <path d="M100,120 C80,150 70,180 60,220" 
+                  class="body-part" data-part="${language === 'english' ? 'Arm' : 'እጅ'}" />
+                <circle cx="60" cy="220" r="15" 
+                  class="body-part" data-part="${language === 'english' ? 'Hand' : 'እጅ'}" />
+                <path d="M200,120 C220,150 230,180 240,220" 
+                  class="body-part" data-part="${language === 'english' ? 'Arm' : 'እጅ'}" />
+                <circle cx="240" cy="220" r="15" 
+                  class="body-part" data-part="${language === 'english' ? 'Hand' : 'እጅ'}" />
+              </g>
+
+              <g class="limb-part">
+                <path d="M120,320 C110,380 100,420 90,480" 
+                  class="body-part" data-part="${language === 'english' ? 'Leg' : 'እግር'}" />
+                <ellipse cx="90" cy="480" rx="20" ry="10" 
+                  class="body-part" data-part="${language === 'english' ? 'Foot' : 'እግር ጫማ'}" />
+                <path d="M180,320 C190,380 200,420 210,480" 
+                  class="body-part" data-part="${language === 'english' ? 'Leg' : 'እግር'}" />
+                <ellipse cx="210" cy="480" rx="20" ry="10" 
+                  class="body-part" data-part="${language === 'english' ? 'Foot' : 'እግር ጫማ'}" />
+              </g>
+            </svg>
+          </div>
+        `;
+
+        document.querySelectorAll('.body-part').forEach(part => {
+          part.addEventListener('click', () => {
+            const bodyPart = part.getAttribute('data-part');
+            const partData = descriptions.bodyParts[language][bodyPart];
+            if (partData) {
+              document.querySelectorAll('.body-part').forEach(p => p.style.filter = '');
+              part.style.filter = 'drop-shadow(0 0 5px var(--primary-color))';
+              
+              selectedItem.textContent = bodyPart;
+              wordDisplay.textContent = partData[0];
+              exampleDisplay.textContent = partData[1];
+              speak(language === 'amharic' ? partData[2] || partData[0] : partData[0], language);
+            }
+          });
+        });
+        return;
+      }
+
+      const itemList = items[category]?.[language];
+      
+      if (!itemList) {
+        console.error(`No items found for category: ${category}, language: ${language}`);
+        return;
+      }
+
+      if (Array.isArray(itemList)) {
+        itemList.forEach((item, index) => {
+          const itemElement = document.createElement('div');
+          itemElement.className = 'item';
+          itemElement.style.animationDelay = `${index * 0.1}s`;
+          itemElement.textContent = item;
+          
+          itemElement.addEventListener('click', () => {
+            const description = descriptions[category]?.[language]?.[item];
+            if (description) {
+              const [word, example] = description;
+              selectedItem.textContent = item;
+              wordDisplay.textContent = word;
+              exampleDisplay.textContent = example;
+              speak(word, language);
+            }
+          });
+          
+          container.appendChild(itemElement);
+          observer.observe(itemElement);
+        });
+      } else if (typeof itemList === 'string') {
+        // Handle string-based items (like alphabet)
+        itemList.split('').forEach((item, index) => {
+          const itemElement = document.createElement('div');
+          itemElement.className = 'item';
+          itemElement.style.animationDelay = `${index * 0.1}s`;
+          itemElement.textContent = item;
+          
+          itemElement.addEventListener('click', () => {
+            const description = descriptions[category]?.[language]?.[item];
+            if (description) {
+              const [word, example] = description;
+              selectedItem.textContent = item;
+              wordDisplay.textContent = word;
+              exampleDisplay.textContent = example;
+              speak(word, language);
+            }
+          });
+          
+          container.appendChild(itemElement);
+          observer.observe(itemElement);
+        });
+      }
+
+      if (category === 'animals') {
+        const animalIcons = {
+          'Lion': `<svg width="40" height="40" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12,3C13.74,3 15.36,3.5 16.74,4.35C17.38,3.53 18.38,3 19.5,3A3.5,3.5 0 0,1 23,6.5C23,8 22.05,9.28 20.72,9.78C20.9,10.5 21,11.23 21,12A9,9 0 0,1 12,21A9,9 0 0,1 3,12C3,11.23 3.1,10.5 3.28,9.78C1.95,9.28 1,8 1,6.5A3.5,3.5 0 0,1 4.5,3C5.62,3 6.62,3.53 7.26,4.35C8.64,3.5 10.26,3 12,3M12,5A7,7 0 0,0 5,12A7,7 0 0,0 12,19A7,7 0 0,0 19,12A7,7 0 0,0 12,5Z"/>
+          </svg>`,
+          // Add more animal icons similarly
+        };
+
+        itemList.forEach((item, index) => {
+          const itemElement = document.createElement('div');
+          itemElement.className = 'animal-item item';
+          itemElement.style.animationDelay = `${index * 0.1}s`;
+          
+          const icon = document.createElement('div');
+          icon.className = 'animal-icon';
+          icon.innerHTML = animalIcons[item] || `<svg width="40" height="40" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12,2L1,21H23M12,6L19.53,19H4.47"/>
+          </svg>`;
+          
+          const text = document.createElement('span');
+          text.textContent = item;
+          
+          itemElement.appendChild(icon);
+          itemElement.appendChild(text);
+          
+          itemElement.addEventListener('click', () => {
+            const description = descriptions[category]?.[language]?.[item];
+            if (description) {
+              const [word, example, pronunciation] = description;
+              selectedItem.textContent = item;
+              wordDisplay.textContent = word;
+              exampleDisplay.textContent = example;
+              
+              // For Amharic, use the pronunciation if available
+              speak(language === 'amharic' && pronunciation ? pronunciation : word, language);
+            }
+          });
+          
+          container.appendChild(itemElement);
+          observer.observe(itemElement);
+        });
+        return;
+      }
+    }
+
+    function createTriviaGame() {
+      const gameContainer = document.createElement('div');
+      gameContainer.className = 'trivia-game';
+      gameContainer.style.cssText = `
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      `;
+      
+      gameContainer.innerHTML = `
+        <div class="question-container">
+          <h3 style="color: var(--primary-color); margin-bottom: 20px;">Amharic Trivia</h3>
+          <p class="question" style="font-size: 18px; margin-bottom: 10px;"></p>
+          <p class="pronunciation" style="font-style: italic; color: #666; margin-bottom: 20px;"></p>
+          <div class="options" style="display: grid; gap: 10px;"></div>
+          <p class="feedback" style="margin: 20px 0; min-height: 50px;"></p>
+          <button class="next-question" style="
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          ">Next Question</button>
+        </div>
+      `;
+
+      let currentQuestion = 0;
+
+      function displayQuestion() {
+        const question = triviaQuestions[currentQuestion];
+        gameContainer.querySelector('.question').textContent = question.question;
+        gameContainer.querySelector('.pronunciation').textContent = `Pronunciation: ${question.pronunciation}`;
+        
+        const optionsContainer = gameContainer.querySelector('.options');
+        optionsContainer.innerHTML = '';
+        question.options.forEach(option => {
+          const button = document.createElement('button');
+          button.textContent = option;
+          button.addEventListener('click', () => checkAnswer(option));
+          optionsContainer.appendChild(button);
+        });
+      }
+
+      function checkAnswer(selectedAnswer) {
+        const question = triviaQuestions[currentQuestion];
+        const feedback = gameContainer.querySelector('.feedback');
+        
+        if (selectedAnswer === question.correctAnswer) {
+          feedback.textContent = 'Correct! ' + question.explanation;
+          feedback.style.color = 'green';
+        } else {
+          feedback.textContent = 'Incorrect. The correct answer is: ' + question.correctAnswer;
+          feedback.style.color = 'red';
+        }
+      }
+
+      gameContainer.querySelector('.next-question').addEventListener('click', () => {
+        currentQuestion = (currentQuestion + 1) % triviaQuestions.length;
+        displayQuestion();
+        gameContainer.querySelector('.feedback').textContent = '';
+      });
+
+      displayQuestion();
+      return gameContainer;
+    }
+
+    function createLetterChaseGame() {
+      const gameContainer = document.createElement('div');
+      gameContainer.className = 'letter-chase';
+
+      let currentWord = '';
+      let score = 0;
+      let timeLeft = 60;
+      let timer;
+      
+      function startGame() {
+        const words = ['HELLO', 'PEACE', 'LOVE', 'HAPPY', 'SMILE', 'LEARN'];
+        currentWord = words[Math.floor(Math.random() * words.length)];
+        
+        gameContainer.innerHTML = `
+          <div class="game-stats" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            <div class="score">Score: ${score}</div>
+            <div class="timer">Time: ${timeLeft}s</div>
+          </div>
+          <div class="target-word" style="font-size: 24px; text-align: center; margin: 20px;">
+            Find: ${currentWord}
+          </div>
+          <div class="letters-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;">
+          </div>
+        `;
+
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+        const gridSize = 25;
+        const gridLetters = new Set([...currentWord.split('')]);
+        while(gridLetters.size < gridSize) {
+          gridLetters.add(letters[Math.floor(Math.random() * letters.length)]);
+        }
+
+        const shuffledLetters = [...gridLetters].sort(() => Math.random() - 0.5);
+        const lettersGrid = gameContainer.querySelector('.letters-grid');
+        
+        shuffledLetters.forEach(letter => {
+          const tile = document.createElement('div');
+          tile.className = 'letter-tile';
+          tile.textContent = letter;
+          tile.addEventListener('click', () => checkLetter(tile, letter));
+          lettersGrid.appendChild(tile);
+        });
+      }
+
+      function checkLetter(tile, letter) {
+        if (letter === currentWord[0]) {
+          tile.classList.add('correct');
+          currentWord = currentWord.slice(1);
+          score += 10;
+          if (currentWord.length === 0) {
+            score += 20; // bonus for completing word
+            setTimeout(startGame, 500);
+          }
+        } else {
+          tile.classList.add('wrong');
+          setTimeout(() => tile.classList.remove('wrong'), 500);
+          score = Math.max(0, score - 5);
+        }
+        gameContainer.querySelector('.score').textContent = `Score: ${score}`;
+      }
+
+      function startTimer() {
+        timer = setInterval(() => {
+          timeLeft--;
+          gameContainer.querySelector('.timer').textContent = `Time: ${timeLeft}s`;
+          if (timeLeft <= 0) {
+            clearInterval(timer);
+            gameContainer.innerHTML = `
+              <div style="text-align: center;">
+                <h2>Game Over!</h2>
+                <p>Final Score: ${score}</p>
+                <button onclick="createLetterChaseGame()" class="category-button letterChase">
+                  Play Again
+                </button>
+              </div>
+            `;
+          }
+        }, 1000);
+      }
+
+      startGame();
+      startTimer();
+      return gameContainer;
+    }
+
+    function speak(text, language) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      
+      if (language === 'amharic') {
+        // Use pronunciation guide for Amharic words
+        const amharicPronunciations = {
+          'አንድ': 'ahnd',
+          'ሁለት': 'hulet',
+          'ሦስት': 'sost',  
+          'አራት': 'arat',
+          'አምስት': 'amist',
+          'ስድስት': 'sidist',
+          'ሰባት': 'sebat', 
+          'ስምንት': 'simint',
+          'ዘጠኝ': 'zetegn',
+          'አስር': 'assir',
+          // Keep existing pronunciations
+          'አንበሳ': 'anbessa',
+          'ዝሆን': 'zihon',
+          // ... rest of existing pronunciations
+        };
+        
+        utterance.text = amharicPronunciations[text] || text;
+        utterance.lang = 'en-US'; // Use English for pronunciation
+      } else {
+        utterance.text = text;
+        utterance.lang = 'en-US';
+      }
+      
+      speechSynthesis.speak(utterance);
+    }
+
+    const categoryButtons = document.querySelectorAll('.category-button');
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        categoryButtons.forEach(btn => btn.style.opacity = '0.7');
+        button.style.opacity = '1';
+        updateContent(button.classList[1]);
+      });
+    });
+
+  </script>
+</body>
+</html>
